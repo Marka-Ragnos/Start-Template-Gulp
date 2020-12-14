@@ -30,7 +30,15 @@ const css = () => {
          .pipe(plumber())
          .pipe(sourcemap.init())
          .pipe(sass())
-         .pipe(postcss([autoprefixer()]))
+         .pipe(
+            postcss([
+               autoprefixer({
+                  grid: true,
+                  overrideBrowserslist: ["last 5 versions"],
+                  cascade: true,
+               }),
+            ])
+         )
          // .pipe(gulp.dest("build/css"))
          .pipe(csso())
          .pipe(rename("style.min.css"))
